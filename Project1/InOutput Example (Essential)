@@ -1,0 +1,172 @@
+Input Example: 
+1
+Dubliners
+James Joyce
+1
+Normal People
+Sally Rooney
+1
+Effective Modern C++
+Scott Meyers
+2
+3
+1
+Dubliners
+3
+1
+Ulysses
+3
+2
+Sally Rooney
+1
+Ulysses
+James Joyce
+3
+2
+James Joyce
+3
+2
+scott
+4
+
+[Output Example]
+도서관 관리 프로그램
+1. 책 추가
+2. 모든 책 출력
+3. 검색
+4. 종료
+선택: 1
+책 제목: Dubliners
+책 저자: James Joyce
+책이 추가되었습니다: Dubliners by James Joyce
+
+도서관 관리 프로그램
+1. 책 추가
+2. 모든 책 출력
+3. 검색
+4. 종료
+선택: 1
+책 제목: Normal People
+책 저자: Sally Rooney
+책이 추가되었습니다: Normal People by Sally Rooney
+
+도서관 관리 프로그램
+1. 책 추가
+2. 모든 책 출력
+3. 검색
+4. 종료
+선택: 1
+책 제목: Effective Modern C++
+책 저자: Scott Meyers
+책이 추가되었습니다: Effective Modern C++ by Scott Meyers
+
+도서관 관리 프로그램
+1. 책 추가
+2. 모든 책 출력
+3. 검색
+4. 종료
+선택: 2
+
+현재 도서 목록:
+- Dubliners by James Joyce
+- Normal People by Sally Rooney
+- Effective Modern C++ by Scott Meyers
+
+도서관 관리 프로그램
+1. 책 추가
+2. 모든 책 출력
+3. 검색
+4. 종료
+선택: 3
+
+검색 방법 선택
+1. 제목으로 검색
+2. 작가 이름으로 검색
+선택: 1
+책 제목 입력: Dubliners
+
+검색 도서 목록 (제목):
+ Dubliners by James Joyce
+
+도서관 관리 프로그램
+1. 책 추가
+2. 모든 책 출력
+3. 검색
+4. 종료
+선택: 3
+
+검색 방법 선택
+1. 제목으로 검색
+2. 작가 이름으로 검색
+선택: 1
+책 제목 입력: Ulysses
+
+검색 도서 목록 (제목):
+찾으시는 책이 없습니다.
+
+도서관 관리 프로그램
+1. 책 추가
+2. 모든 책 출력
+3. 검색
+4. 종료
+선택: 3
+
+검색 방법 선택
+1. 제목으로 검색
+2. 작가 이름으로 검색
+선택: 2
+작가 이름 입력: Sally Rooney
+
+검색 도서 목록 (작가):
+Normal People by Sally Rooney
+
+도서관 관리 프로그램
+1. 책 추가
+2. 모든 책 출력
+3. 검색
+4. 종료
+선택: 1
+책 제목: Ulysses
+책 저자: James Joyce
+책이 추가되었습니다: Ulysses by James Joyce
+
+도서관 관리 프로그램
+1. 책 추가
+2. 모든 책 출력
+3. 검색
+4. 종료
+선택: 3
+
+검색 방법 선택
+1. 제목으로 검색
+2. 작가 이름으로 검색
+선택: 2
+작가 이름 입력: James Joyce
+
+검색 도서 목록 (작가):
+Dubliners by James Joyce
+Ulysses by James Joyce
+
+도서관 관리 프로그램
+1. 책 추가
+2. 모든 책 출력
+3. 검색
+4. 종료
+선택: 3
+
+검색 방법 선택
+1. 제목으로 검색
+2. 작가 이름으로 검색
+선택: 2
+작가 이름 입력: scott
+
+검색 도서 목록 (작가):
+찾으시는 작가의 책이 없습니다.
+
+도서관 관리 프로그램
+1. 책 추가
+2. 모든 책 출력
+3. 검색
+4. 종료
+선택: 4
+프로그램을 종료합니다.
