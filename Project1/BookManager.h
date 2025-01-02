@@ -14,15 +14,20 @@ private:
 public:
     // 책 추가 메서드
     void addBook(const string& title, const string& author);
-
     // 모든 책 출력 메서드
     void displayAllBooks() const;
 
+    // 필수 기능
     // 책 제목으로 검색
     void searchByTitle(const string& title) const;
-
     // 작가 이름으로 검색
     void searchByAuthor(const string& author) const;
+
+    // 도전 기능
+    vector<Book> findBookByTitle(const string& title);
+    vector<Book> findBookByAuthor(const string& author);
+    const Book* getBookByTitle(const string& title) const;
+    const Book* getBookByAuthor(const string& author) const;
 };
 
 void BookManager::addBook(const string& title, const string& author) {
@@ -38,15 +43,16 @@ void BookManager::displayAllBooks() const {
 
     cout << "\n현재 도서 목록:" << endl;
     for (size_t i = 0; i < books.size(); i++) { // 일반적인 for문 사용
-        cout << "- " << books[i].title << " by " << books[i].author << endl;
+        cout << "- " << books[i].getTitle() << " by " << books[i].getAuthor() << endl;
     }
 }
 
 void BookManager::searchByTitle(const string& title) const {
     cout << "\n검색 도서 목록 (제목): " << endl;
-    auto iter = find_if(books.begin(), books.end(), [title](const Book& curr) { return curr.title == title; });
+    auto iter = find_if(books.begin(), books.end(),
+        [title](const Book& curr) { return curr.getTitle() == title; });
     if (iter != books.end()) {
-        cout << " " << iter->title << " by " << iter->author << endl;
+        cout << " " << iter->getTitle() << " by " << iter->getAuthor() << endl;
     }
     else cout << "찾으시는 책이 없습니다." << endl;
 }
@@ -54,9 +60,41 @@ void BookManager::searchByTitle(const string& title) const {
 void BookManager::searchByAuthor(const string& author) const {
     cout << "\n검색 도서 목록 (작가): " << endl;
     vector<Book> searchBooks;
-    for (const auto& iter : books) { if (iter.author == author) searchBooks.emplace_back(iter); }
+    for (const auto& iter : books) {
+        if (iter.getAuthor() == author) searchBooks.emplace_back(iter);
+    }
     if (!searchBooks.empty()) {
-        for (const auto& iter : searchBooks) cout << iter.title << " by " << iter.author << endl;
+        for (const auto& iter : searchBooks) cout << iter.getTitle() << " by " << iter.getAuthor() << endl;
     }
     else cout << "찾으시는 작가의 책이 없습니다." << endl;
+}
+
+vector<Book> BookManager::findBookByTitle(const string& title) {
+    vector<Book> fBooks;
+    for (const auto& iter : books) {
+        if (iter.getTitle() == title) fBooks.emplace_back(iter);
+    }
+    return fBooks;
+}
+
+vector<Book> BookManager::findBookByAuthor(const string& author) {
+    vector<Book> fBooks;
+    for (const auto& iter : books) {
+        if (iter.getAuthor() == author) fBooks.emplace_back(iter);
+    }
+    return fBooks;
+}
+
+const Book* BookManager::getBookByTitle(const string& title) const {
+    for (const auto& iter : books) {
+        if (iter.getTitle() == title) return &iter;
+    }
+    return nullptr;
+}
+
+const Book* BookManager::getBookByAuthor(const string& author) const {
+    for (const auto& iter : books) {
+        if (iter.getAuthor() == author) return &iter;
+    }
+    return nullptr;
 }
