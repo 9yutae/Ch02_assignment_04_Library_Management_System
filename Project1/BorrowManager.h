@@ -28,8 +28,9 @@ void BorrowManager::borrowBook(vector<Book> books) {
 	int idx = 0;
 	while (true) {
 		if (books.size() != 1) {
+			idx = 0;
 			cout << "다음 도서 중 하나를 선택하세요." << endl;
-			for (const auto& w : books) cout << idx++ << ". " << w.getTitle() << ": " << stock[w] << "권" << endl;
+			for (const auto& w : books) cout << idx++ << ". " << w.getTitle() << "(" << w.getAuthor() << "): " << stock[w] << "권" << endl;
 			cin >> idx;
 		}
 		if (idx >= 0 && idx < books.size()) break;
@@ -49,9 +50,10 @@ void BorrowManager::borrowBook(vector<Book> books) {
 void BorrowManager::returnBook(vector<Book> books) {
 	int idx = 0;
 	while (true) {
+		idx = 0;
 		if (books.size() != 1) {
 			cout << "다음 도서 중 하나를 선택하세요." << endl;
-			for (const auto& w : books) cout << idx++ << ". " << w.getTitle() << ": " << stock[w] << "권" << endl;
+			for (const auto& w : books) cout << idx++ << ". " << w.getTitle() << "(" << w.getAuthor() << "): " << stock[w] << "권" << endl;
 			cin >> idx;
 		}
 		if (idx >= 0 && idx < books.size()) break;

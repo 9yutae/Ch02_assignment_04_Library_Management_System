@@ -54,7 +54,7 @@ void BookManager::searchByTitle(const string& title) const {
     cout << "\n검색 도서 목록 (제목): " << endl;
     vector<Book> searchBooks;
     for (const auto& iter : books) {
-        if (iter.getAuthor() == title) searchBooks.emplace_back(iter);
+        if (iter.getTitle() == title) searchBooks.emplace_back(iter);
     }
     if (!searchBooks.empty()) {
         for (const auto& iter : searchBooks) cout << iter.getTitle() << " by " << iter.getAuthor() << endl;
