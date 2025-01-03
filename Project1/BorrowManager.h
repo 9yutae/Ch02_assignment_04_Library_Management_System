@@ -10,8 +10,8 @@ private:
 
 public:
 	void initalizeStock(Book book, int quantity = 3);
-	void borrowBook(const Book& title);
-	void returnBook(const Book& title);
+	void borrowBook(vector<Book> books);
+	void returnBook(vector<Book> books);
 	void displayStock();
 };
 
@@ -24,29 +24,46 @@ void BorrowManager::initalizeStock(Book book, int quantity) {
 }
 
 // 책 대여
-void BorrowManager::borrowBook(const Book& book) {
-	if (stock.find(book) != stock.end()) {
-		if (stock[book] > 0) {
-			stock[book]--;
-			cout << book.getTitle() << "(" << book.getAuthor() << ")을(를) 대여하였습니다." << endl;
-			cout << "남은 재고: " << stock[book] << "권" << endl;
+void BorrowManager::borrowBook(vector<Book> books) {
+	int idx = 0;
+	while (true) {
+		if (books.size() != 1) {
+			cout << "다음 도서 중 하나를 선택하세요." << endl;
+			for (const auto& w : books) cout << idx++ << ". " << w.getTitle() << ": " << stock[w] << "권" << endl;
+			cin >> idx;
 		}
-		else cout << book.getTitle() << "(" << book.getAuthor() << ")이(가) 현재 모두 대여 중입니다." << endl;
+		if (idx >= 0 && idx < books.size()) break;
+		else cout << "다시 선택하세요." << endl;
 	}
-	else cout << "등록되지 않은 도서입니다." << endl;
+
+
+	if (stock[books[idx]] > 0) {
+		stock[books[idx]]--;
+		cout << books[idx].getTitle() << "(" << books[idx].getAuthor() << ")을(를) 대여하였습니다." << endl;
+		cout << "남은 재고: " << stock[books[idx]] << "권" << endl;
+	}
+	else cout << books[idx].getTitle() << "(" << books[idx].getAuthor() << ")이(가) 현재 모두 대여 중입니다." << endl;
 }
 
 // 책 반납
-void BorrowManager::returnBook(const Book& book) {
-	if (stock.find(book) != stock.end()) {
-		if (stock[book] < 3) {
-			stock[book]++;
-			cout << book.getTitle() << "(" << book.getAuthor() << ")을(를) 반납하였습니다." << endl;
-			cout << "남은 재고: " << stock[book] << "권" << endl;
+void BorrowManager::returnBook(vector<Book> books) {
+	int idx = 0;
+	while (true) {
+		if (books.size() != 1) {
+			cout << "다음 도서 중 하나를 선택하세요." << endl;
+			for (const auto& w : books) cout << idx++ << ". " << w.getTitle() << ": " << stock[w] << "권" << endl;
+			cin >> idx;
 		}
-		else cout << book.getTitle() << "(" << book.getAuthor() << ")이(가) 대여 중이 아닙니다." << endl;
+		if (idx >= 0 && idx < books.size()) break;
+		else cout << "다시 선택하세요." << endl;
 	}
-	else cout << "등록되지 않은 도서입니다." << endl;
+
+	if (stock[books[idx]] < 3) {
+		stock[books[idx]]++;
+		cout << books[idx].getTitle() << "(" << books[idx].getAuthor() << ")을(를) 반납하였습니다." << endl;
+		cout << "남은 재고: " << stock[books[idx]] << "권" << endl;
+	}
+	else cout << "대여 중인 " << books[idx].getTitle() << "(" << books[idx].getAuthor() << ")이(가) 없습니다." << endl;
 }
 
 // 도서 재고 현황

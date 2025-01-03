@@ -30,11 +30,13 @@ public:
     const Book* getBookByAuthor(const string& author) const;
 };
 
+// 책 추가 메서드
 void BookManager::addBook(const string& title, const string& author) {
     books.push_back(Book(title, author)); // push_back 사용
     cout << "책이 추가되었습니다: " << title << " by " << author << endl;
 }
 
+// 모든 책 출력
 void BookManager::displayAllBooks() const {
     if (books.empty()) {
         cout << "현재 등록된 책이 없습니다." << endl;
@@ -47,16 +49,20 @@ void BookManager::displayAllBooks() const {
     }
 }
 
+// 제목으로 책 검색 (출력)
 void BookManager::searchByTitle(const string& title) const {
     cout << "\n검색 도서 목록 (제목): " << endl;
-    auto iter = find_if(books.begin(), books.end(),
-        [title](const Book& curr) { return curr.getTitle() == title; });
-    if (iter != books.end()) {
-        cout << " " << iter->getTitle() << " by " << iter->getAuthor() << endl;
+    vector<Book> searchBooks;
+    for (const auto& iter : books) {
+        if (iter.getAuthor() == title) searchBooks.emplace_back(iter);
+    }
+    if (!searchBooks.empty()) {
+        for (const auto& iter : searchBooks) cout << iter.getTitle() << " by " << iter.getAuthor() << endl;
     }
     else cout << "찾으시는 책이 없습니다." << endl;
 }
 
+// 작가 이름으로 책 검색 (출력)
 void BookManager::searchByAuthor(const string& author) const {
     cout << "\n검색 도서 목록 (작가): " << endl;
     vector<Book> searchBooks;
@@ -69,6 +75,7 @@ void BookManager::searchByAuthor(const string& author) const {
     else cout << "찾으시는 작가의 책이 없습니다." << endl;
 }
 
+// 해당 제목의 도서 목록 반환
 vector<Book> BookManager::findBookByTitle(const string& title) {
     vector<Book> fBooks;
     for (const auto& iter : books) {
@@ -77,6 +84,7 @@ vector<Book> BookManager::findBookByTitle(const string& title) {
     return fBooks;
 }
 
+// 해당 작가의 도서 목록 반환
 vector<Book> BookManager::findBookByAuthor(const string& author) {
     vector<Book> fBooks;
     for (const auto& iter : books) {

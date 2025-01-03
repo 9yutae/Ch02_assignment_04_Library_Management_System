@@ -30,7 +30,7 @@ int main() {
             cout << "책 저자: ";
             getline(cin, author); // 저자명 입력 (공백 포함)
             bookManager.addBook(title, author); // 입력받은 책 정보를 추가
-            borrowManager.initalizeStock(Book(title, author));
+            borrowManager.initalizeStock(Book(title, author)); // 재고 추가
         }
         else if (choice == "2") {
             // 2번 선택: 모든 책 출력
@@ -46,12 +46,13 @@ int main() {
 
             string keyword;
             cin.ignore();
-            if (searchOption == "1") {
+
+            if (searchOption == "1") { // 제목으로 검색
                 cout << "책 제목을 입력하세요 : ";
                 getline(cin, keyword);
                 bookManager.searchByTitle(keyword);
             }
-            else if (searchOption == "2") {
+            else if (searchOption == "2") { // 작가 이름으로 검색
                 cout << "작가를 입력하세요 : ";
                 getline(cin, keyword);
                 bookManager.searchByAuthor(keyword);
@@ -64,7 +65,7 @@ int main() {
             // 4번 선택: 책 대여
             // 대여 가능 여부 확인 및 대여/반납 진행
             cout << "\n도서 대여" << endl;
-            cout << "1. 도서 재고 현황" << endl;
+            cout << "1. 현재 도서 재고" << endl;
             cout << "2. 도서 대여" << endl;
             cout << "3. 도서 반납" << endl;
             cout << "선택: ";
@@ -72,31 +73,32 @@ int main() {
             string borrowType;
             cin >> borrowType;
 
-            if (borrowType == "1") {
+            // 현재 도서 재고
+            if (borrowType == "1") { 
                 borrowManager.displayStock();
             }
-            else if (borrowType == "2") {
+            else if (borrowType == "2") {  // 대여 절차
                 cout << "검색 옵션을 선택하세요: 1) 제목으로 검색, 2) 작가로 검색" << endl;
                 string searchOption;
                 cin >> searchOption;
 
                 string keyword;
                 cin.ignore();
-                if (searchOption == "1") {
+                if (searchOption == "1") {  // 책 제목으로 대여
                     cout << "책 제목을 입력하세요 : ";
                     getline(cin, keyword);
-                    if (auto iter = bookManager.getBookByTitle(keyword)) borrowManager.borrowBook(*iter);
+                    if (bookManager.getBookByTitle(keyword)) borrowManager.borrowBook(bookManager.findBookByTitle(keyword));
                     else cout << "잘못된 입력입니다." << endl;
                 }
-                else if (searchOption == "2") {
+                else if (searchOption == "2") {  // 작가 이름으로 대여
                     cout << "작가를 입력하세요 : ";
                     getline(cin, keyword);
-                    if (auto iter = bookManager.getBookByAuthor(keyword)) borrowManager.borrowBook(*iter);
+                    if (bookManager.getBookByAuthor(keyword)) borrowManager.borrowBook(bookManager.findBookByAuthor(keyword));
                     else cout << "잘못된 입력입니다." << endl;
                 }
                 else cout << "잘못된 입력입니다." << endl;
             }
-            else if (borrowType == "3") {
+            else if (borrowType == "3") {  // 반납 절차
                 cout << "검색 옵션을 선택하세요: 1) 제목으로 검색, 2) 작가로 검색" << endl;
                 string searchOption;
                 cin >> searchOption;
@@ -106,13 +108,13 @@ int main() {
                 if (searchOption == "1") {
                     cout << "책 제목을 입력하세요 : ";
                     getline(cin, keyword);
-                    if (auto iter = bookManager.getBookByTitle(keyword)) borrowManager.returnBook(*iter);
+                    if (bookManager.getBookByTitle(keyword)) borrowManager.returnBook(bookManager.findBookByTitle(keyword));
                     else cout << "잘못된 입력입니다." << endl;
                 }
                 else if (searchOption == "2") {
                     cout << "작가를 입력하세요 : ";
                     getline(cin, keyword);
-                    if (auto iter = bookManager.getBookByAuthor(keyword)) borrowManager.returnBook(*iter);
+                    if (bookManager.getBookByAuthor(keyword)) borrowManager.returnBook(bookManager.findBookByAuthor(keyword));
                     else cout << "잘못된 입력입니다." << endl;
                 }
                 else cout << "잘못된 입력입니다." << endl;
